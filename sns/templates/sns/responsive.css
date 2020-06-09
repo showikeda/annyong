@@ -1,0 +1,28 @@
+@media (max-width: 1000px) {
+
+}
+
+@media (max-width: 670px) {
+  .header-right {
+    display: none;
+  }
+
+  .comments {
+    text-align: left;
+  }
+
+  .fas.menu-icon {
+    display: block;
+    float: right;
+    margin: 15px;
+    font-size: 40px;
+    color: white;
+  }
+
+  .btn {
+    width: 70%;
+    margin: 8px;
+    padding: 0;
+    flex-direction: column;
+  }
+}
