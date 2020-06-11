@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>あんにょん</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="stylesheet.css">
+        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="responsive.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     </head>
@@ -49,6 +49,13 @@
         <div class="main">
             <div class="topics">
                 <h1>記事一覧</h1>
+                <p>{{ message }}</p>
+                {% for article in articles %}
+                    <p>
+                        {{ article.content }},
+                        <a href="{% url 'sns:detail' article.id %}">詳細</a>
+                    </p>
+                {% endfor %}
                 <i class="more fas fa-angle-double-down fa-2x fa-border"></i>
             </div>
         </div>
