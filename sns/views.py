@@ -1,12 +1,21 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Article
+from .forms import SearchForm
 
 def index(request):
-    articles = Article.objects.all()
+    searchForm = SearchForm(request.GET)
+    if searchForm.is_valid():
+        keyword = searchForm.cleaned_data['keyword']
+        articles = Article.ojects.filler(content__contains=keyword)
+    else:
+        searchForm = SearchForm()
+        articles = Article.objects.all()
+
     context = {
         'message': 'Welcome my BBS',
         'articles': articles,
+        'searchForm': searchForm,
     }
     return render(request, 'sns/index.html', context)
 

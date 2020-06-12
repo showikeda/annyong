@@ -1,69 +1,54 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>あんにょん</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    </head>
-    <body>
-    <!-- ここからヘッダーを作ります。 -->
-        <header>
-            <div class="header-container">
-                <div class="header-left">
-                    <h1 class="logo">あんにょん</h1>
-                </div>
-                <i class="fas fa-bars menu-icon"></i>
-                <div class="header-right">
-                    <a href="#" class="login">ログイン</a>
-                </div>
+{% extends './base.html' %}
+{% block content %}
+    <div class="top-wrapper">
+        <div class="container">
+            <h1>あんにょん</h1>
+            <div class="comments">
+              <p>韓国語の本場の発音を学ぶ！</p>
+              <p>友達を増やすにも最高の場となる。</p>
             </div>
-        </header>
-        <div class="top-wrapper">
-            <div class="container">
-                <h1>あんにょん</h1>
-                <div class="comments">
-                  <p>韓国語の本場の発音を学ぶ！</p>
-                  <p>友達を増やすにも最高の場となる。</p>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="#" class="btn signup">新規登録はこちら</a>
-                    <p>or signup up with</p>
-                    <a href="#" class="btn facebook sns">
-                        <i class="fab fa-facebook"></i>
-                        Facebookで登録
-                    </a>
-                    <a href="#" class="btn twitter sns">
-                        <i class="fab fa-twitter-square"></i>
-                        Twitterで登録
-                    </a>
-                    <a href="#" class="btn line sns">
-                        <i class="fab fa-line"></i>
-                        LINEで登録
-                    </a>
-                </div>
+            <div class="btn-wrapper">
+                <a href="#" class="btn signup">新規登録はこちら</a>
+                <p>or signup up with</p>
+                <a href="#" class="btn facebook sns">
+                    <i class="fab fa-facebook"></i>
+                    Facebookで登録
+                </a>
+                <a href="#" class="btn twitter sns">
+                    <i class="fab fa-twitter-square"></i>
+                    Twitterで登録
+                </a>
+                <a href="#" class="btn line sns">
+                    <i class="fab fa-line"></i>
+                    LINEで登録
+                </a>
             </div>
         </div>
-        <div class="main">
-            <div class="topics">
-                <h1>記事一覧</h1>
-                <p>{{ message }}</p>
-                {% for article in articles %}
-                    <p>
-                        {{ article.content }},{{ article.user_name }},
-                        <a href="{% url 'sns:detail' article.id %}">詳細</a>,
-                        <a href="{% url 'sns:delete' article.id %}">削除</a>
-                    </p>
-                {% endfor %}
+    </div>
+    <div class="main">
+        <div class="topics">
+            <h1>記事一覧</h1>
+            {% if searchForm %}
+                <form action='{% url "sns:index" %}' method='get'>
+                    <div class='form-group'>
+                        {{ searchForm }}
+                        <input type="submit" class="btn btn-outline-primary" value="OK" />
+                        <a href="{% url 'sns:index' %}" class="btn btn-outline-secondary">クリア</a>
+                    </div>
+                </form>
+            {% endif %}
+            <p>{{ message }}</p>
+            {% for article in articles %}
                 <p>
-                    <a href="{% url 'sns:create' %}">新規</a>
+                    {{ article.content }},{{ article.user_name }},
+                    <a href="{% url 'sns:detail' article.id %}">詳細</a>,
+                    <a href="{% url 'sns:delete' article.id %}">削除</a>
                 </p>
-                <i class="more fas fa-angle-double-down fa-2x fa-border"></i>
-            </div>
+            {% endfor %}
+            <p>
+                <a href="{% url 'sns:create' %}">新規</a>
+            </p>
+            <i class="more fas fa-angle-double-down fa-2x fa-border"></i>
         </div>
-        <footer></footer>
-    </body>
-</html>
+    </div>
+{% endblock %}
