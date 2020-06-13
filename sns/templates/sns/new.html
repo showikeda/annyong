@@ -1,0 +1,9 @@
+{% extends './base.html' %}
+{% block content %}
+    <h1>{{ message }}</h1>
+    <form action='{% url "sns:create" %}' method='post' class='form'>
+        {% csrf_token %}
+        <button type='submit' class='btn btn-outline-primary'>作成する</button>
+        <a href='{% url "sns:index" %}' class='btn btn-outline-secondary'>戻る</a>
+    </form>
+{% endblock %}

@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Article
 from .forms import SearchForm
+from .forms import ArticleForm
+
 
 def index(request):
     searchForm = SearchForm(request.GET)
@@ -19,6 +21,7 @@ def index(request):
     }
     return render(request, 'sns/index.html', context)
 
+
 def detail(request, id):
     article = get_object_or_404(Article, pk=id)
     context = {
@@ -27,16 +30,53 @@ def detail(request, id):
     }
     return render(request, 'sns/detail.html', context)
 
-def create(request):
-    article = Article(content='Hello BBS', user_name='paiza')
-    article.save()
-    articles = Article.objects.all()
+
+def new(request):
+    articleForm = ArticleForm()
 
     context = {
-        'message': 'Create article',
-        'articles': articles,
+        'message': 'New Article',
+        'articleForm': articleForm,
     }
-    return render(request, 'sns/index.html', context)
+    return render(request, 'sns/new.html', context)
+
+
+def create(request):
+    if request.method == 'POST':
+        articleForm = ArticleForm(request.POST)
+        if articleForm.is_valid():
+            article = articleForm.save()
+
+    context = {
+        'message': 'Create article' + str(article.id),
+        'article': article,
+    }
+    return render(request, 'sns/detail.html', context)
+
+
+def edit(repuest, id):
+    article = get_object_or_404(Article, pk=id)
+    articleForm = ArticleForm(instance=article)
+    context = {
+        'message': 'Edit Article' + str(id),
+        'article': article,
+        'articleForm': articleForm
+    }
+    return render(request, 'sns/edit.html', context)
+
+
+def update(request, id):
+    if request.method == 'POST':
+        article = get_object_or_404(Article, pk=id)
+        articleForm = ArticleForm(request.POST, instance=article)
+        if articleForm.is_valid():
+            articleForm.save()
+    context = {
+        'message': 'Update Article' + str(id),
+        'article': article,
+    }
+    return render(request, 'sns/detail.html', context)
+
 
 def delete(request, id):
     article = get_object_or_404(Article, pk=id)
