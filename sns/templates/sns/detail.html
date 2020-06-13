@@ -1,11 +1,37 @@
-{% extends './base.html' %}
-{% block content %}
-        <h1>paiza bbs</h1>
-        <p>{{ message }}</p>
-        <p>{{ article.content }},{{ article.user_name }}</p>
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>あんにょん</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    </head>
+    <body>
+    <!-- ここからヘッダーを作ります。 -->
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <h1 class="logo">あんにょん</h1>
+            </div>
+            <i class="fas fa-bars menu-icon"></i>
+            <div class="header-right">
+                <a href="#" class="login">ログイン</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>title</h1>
+        <p>{{ article.user_name }}</p>
+        <p>{{ article.content }}</p>
         <div>
             <a href='{% url "sns:index" %}'>一覧</a>
             <a href='{% url "sns:edit" article.id %}'>編集</a>
             <a href='{% url "sns:delete" article.id %}'>削除</a>
         </div>
-{% endblock %}
+    </main>
+    <footer></footer>
+    </body>
+</html>

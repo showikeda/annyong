@@ -54,13 +54,13 @@ def create(request):
     return render(request, 'sns/detail.html', context)
 
 
-def edit(repuest, id):
+def edit(request, id):
     article = get_object_or_404(Article, pk=id)
     articleForm = ArticleForm(instance=article)
     context = {
         'message': 'Edit Article' + str(id),
         'article': article,
-        'articleForm': articleForm
+        'articleForm': articleForm,
     }
     return render(request, 'sns/edit.html', context)
 
@@ -71,8 +71,9 @@ def update(request, id):
         articleForm = ArticleForm(request.POST, instance=article)
         if articleForm.is_valid():
             articleForm.save()
+
     context = {
-        'message': 'Update Article' + str(id),
+        'message': 'Update article ' + str(id),
         'article': article,
     }
     return render(request, 'sns/detail.html', context)

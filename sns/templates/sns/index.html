@@ -32,8 +32,7 @@
                 <form action='{% url "sns:index" %}' method='get'>
                     <div class='form-group'>
                         {{ searchForm }}
-                        <input type="submit" class="btn btn-outline-primary" value="OK" />
-                        <a href="{% url 'sns:index' %}" class="btn btn-outline-secondary">クリア</a>
+                        <input type="submit" value="OK" />
                     </div>
                 </form>
             {% endif %}
