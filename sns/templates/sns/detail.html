@@ -6,4 +6,17 @@
     <p>
         <a href='{% url "sns:index" %}' class='btn btn-outline-primary'>一覧</a>
     </p>
+<!--    <form method="GET">-->
+<!--    {% csrf_token %}-->
+<!--        <p>タイトル：<input type="text" name="comment"></p>-->
+<!--        <p>メモ：<input type="text" name="user_name"></p>-->
+<!--        <input type="submit" value="投稿する">-->
+<!--    </form>-->
+<!--    {% for post in object_list %}-->
+<!--    <div class="post">-->
+<!--        <p>タイトル：{{ post.comment }}</p>-->
+<!--        <p>メモ：{{ post.user_name }}</p>-->
+<!--        <p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+<!--    </div>-->
+    {% endfor %}
 {% endblock %}

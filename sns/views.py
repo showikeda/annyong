@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Article
 from .forms import SearchForm
 from .forms import ArticleForm
+from .models import Comments
+
 
 
 def index(request):
@@ -24,9 +26,14 @@ def index(request):
 
 def detail(request, id):
     article = get_object_or_404(Article, pk=id)
+    # comment = get_object_or_404(Comments)
+    # user_name = get_object_or_404(Comments)
     context = {
         'message': 'Show Article' + str(id),
         'article': article,
+        # 'comment': comment,
+        # 'user_name': user_name,
+
     }
     return render(request, 'sns/detail.html', context)
 
